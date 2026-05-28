@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% set admin_page = True %}
+{% block content %}
+<div class="dashboard">
+    <h1>Manage News</h1>
+
+    <a href="/admin/news/add" class="btn" style="margin-bottom:15px;">+ Add News</a>
+
+    <table style="width:100%; background:white; color:black; border-radius:10px; padding:10px;">
+        <tr style="background:#1e293b; color:white;">
+            <th>ID</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for item in news %}
+        <tr>
+            <td>{{ item.id }}</td>
+
+            <td>
+                {% if item.image_url %}
+                    <img src="{{ item.image_url }}" width="70" style="border-radius:6px;">
+                {% else %}
+                    <span style="color:gray;">No Image</span>
+                {% endif %}
+            </td>
+
+            <td>{{ item.title }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.created_at.strftime('%Y-%m-%d') }}</td>
+
+            <td>
+                <a href="/admin/news/edit/{{ item.id }}">Edit</a> |
+                <a href="/admin/news/delete/{{ item.id }}"
+                   onclick="return confirm('Delete this news?')"
+                   style="color:red;">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

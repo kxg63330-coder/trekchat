@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Blog Post</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="seo_title" value="{{ post.seo_title }}" placeholder="SEO Title" required>
+
+    <textarea name="meta_description" rows="3" required>{{ post.meta_description }}</textarea>
+
+    <input type="text" name="title" value="{{ post.title }}" required>
+
+    <label>Current Image:</label>
+    <img src="{{ post.featured_image }}" style="width:200px; border-radius:10px;">
+
+    <label>Upload New Image (optional)</label>
+    <input type="file" name="featured_image" accept="image/*">
+
+    <select name="category">
+        <option value="{{ post.category }}">{{ post.category }}</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Travel Tips">Travel Tips</option>
+        <option value="Destinations">Destinations</option>
+        <option value="Guides">Guides</option>
+    </select>
+
+    <input type="text" name="tags" value="{{ post.tags }}">
+
+    <textarea name="content" rows="10">{{ post.content }}</textarea>
+
+    <button type="submit" class="btn-small">Save Changes</button>
+
+</form>
+{% endblock %}

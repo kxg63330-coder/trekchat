@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="alerts-page reveal">
+    <h1>Emergency Alerts Dashboard</h1>
+    <p>Real-time global and local emergency alerts for trekkers.</p>
+
+    <!-- GDACS -->
+    <h2>🌍 Global Disaster Alerts (GDACS)</h2>
+    {% if alerts.gdacs %}
+        {% for a in alerts.gdacs %}
+            <div class="alert-card">
+                <h3>{{ a.title }}</h3>
+                <p>{{ a.summary|safe }}</p>
+                <p><strong>Date:</strong> {{ a.date }}</p>
+                <a href="{{ a.link }}" target="_blank">View Details</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No GDACS alerts available.</p>
+    {% endif %}
+
+    <!-- ReliefWeb -->
+    <h2>🆘 Humanitarian Emergencies (ReliefWeb)</h2>
+    {% if alerts.reliefweb %}
+        {% for a in alerts.reliefweb %}
+            <div class="alert-card">
+                <h3>{{ a.name }}</h3>
+                <p><strong>Type:</strong> {{ a.type }}</p>
+                <p><strong>Status:</strong> {{ a.status }}</p>
+                <p><strong>Country:</strong> {{ a.country }}</p>
+                <a href="{{ a.url }}" target="_blank">More Info</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No ReliefWeb alerts available.</p>
+    {% endif %}
+
+    <!-- NASA FIRMS -->
+    <h2>🔥 Wildfire Alerts (NASA FIRMS)</h2>
+    {% if alerts.nasa_fires %}
+        {% for f in alerts.nasa_fires %}
+            <div class="alert-card">
+                <p><strong>Location:</strong> {{ f.latitude }}, {{ f.longitude }}</p>
+                <p><strong>Brightness:</strong> {{ f.brightness }}</p>
+                <p><strong>Date:</strong> {{ f.acq_date }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No wildfire alerts available.</p>
+    {% endif %}
+
+    <!-- Local Weather -->
+    <h2>⛅ Local Weather Danger Alerts</h2>
+    {% for w in alerts.local_weather %}
+        <div class="alert-card">
+            <h3>{{ w.region }}</h3>
+            <p>Temperature: {{ w.temperature }}°C</p>
+            <p>Wind: {{ w.wind }} km/h</p>
+
+            {% if w.warnings %}
+                <ul>
+                    {% for warn in w.warnings %}
+                        <li>{{ warn }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No warnings.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

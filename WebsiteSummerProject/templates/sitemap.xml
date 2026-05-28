@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://localhost:5000/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/blog</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/about</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/contact</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/privacy</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/terms</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:5000/disclaimer</loc>
+    </url>
+
+    {% for post in posts %}
+    <url>
+        <loc>http://localhost:5000/post/{{ post.id }}</loc>
+    </url>
+    {% endfor %}
+
+</urlset>

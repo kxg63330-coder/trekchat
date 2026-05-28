@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="add-post-title">Add New Blog Post</h1>
+
+<div class="add-post-container">
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- SEO Title -->
+        <input type="text" name="seo_title" placeholder="SEO Title (Google Title)" required>
+
+        <!-- Meta Description -->
+        <textarea name="meta_description" placeholder="Meta Description (150–160 characters)" rows="3" required></textarea>
+
+        <!-- Blog Title -->
+        <input type="text" name="title" placeholder="Blog Title" required>
+
+        <!-- Date -->
+        <input type="text" name="date" placeholder="Date (e.g. May 14, 2026)" required>
+
+        <!-- Featured Image -->
+        <label class="label">Featured Image</label>
+        <input type="file" name="featured_image" accept="image/*">
+
+        <!-- Category -->
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Travel Tips">Travel Tips</option>
+            <option value="Destinations">Destinations</option>
+            <option value="Guides">Guides</option>
+        </select>
+
+        <!-- Tags -->
+        <input type="text" name="tags" placeholder="Tags (comma separated)">
+
+        <!-- Rich Text Editor -->
+        <div id="editor"></div>
+        <input type="hidden" name="content" id="hiddenContent">
+
+        <!-- Word Count + Reading Time -->
+        <div class="stats-box">
+            <span id="wordCount">Words: 0</span>
+            <span id="readingTime">Reading Time: 0 min</span>
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" name="action" value="publish" class="publish-btn">Publish</button>
+        <button type="submit" name="action" value="draft" class="draft-btn">Save Draft</button>
+
+    </form>
+</div>
+
+<!-- Quill Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+  const quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Write your blog content here...',
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'header': [1, 2, 3, false] }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link', 'image']
+      ]
+    }
+  });
+
+  // Save HTML content before submitting
+  document.querySelector('form').onsubmit = function() {
+    document.querySelector('#hiddenContent').value = quill.root.innerHTML;
+  };
+
+  // Word Count + Reading Time
+  quill.on('text-change', function() {
+    const text = quill.getText().trim();
+    const words = text.split(/\s+/).filter(word => word.length > 0).length;
+    document.getElementById("wordCount").innerText = "Words: " + words;
+    document.getElementById("readingTime").innerText = "Reading Time: " + Math.ceil(words / 200) + " min";
+  });
+</script>
+
+{% endblock %}

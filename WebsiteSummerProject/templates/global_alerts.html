@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin: auto; padding: 20px;">
+    <h1>🌍 Global Travel Emergency Alerts</h1>
+    <p style="color: gray;">Real‑time worldwide incidents from UN ReliefWeb</p>
+
+    {% if alerts %}
+        {% for a in alerts %}
+            <div style="
+                background: #fff3cd;
+                border-left: 5px solid #ff9800;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 6px;
+            ">
+                <h2 style="margin: 0;">{{ a.title }}</h2>
+                <p style="margin: 5px 0;"><strong>Type:</strong> {{ a.type }}</p>
+                <p style="margin: 5px 0;"><strong>Country:</strong> {{ a.country }}</p>
+                <p style="margin: 5px 0;"><strong>Status:</strong> {{ a.status }}</p>
+                <p style="margin: 5px 0; color: gray;"><strong>Date:</strong> {{ a.date }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No global alerts at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}
