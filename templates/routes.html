@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title">World Trekking Routes</h1>
+
+<div class="route-grid">
+    {% for route in routes %}
+    <div class="route-card card-glow">
+        <img src="{{ route.image_url }}" alt="{{ route.name }}">
+
+        <div class="route-info">
+            <h3>{{ route.name }}</h3>
+
+            <p class="route-meta">
+                🌍 {{ route.country }}
+                • 🧭 {{ route.distance_km }} km
+                • ⛰️ {{ route.difficulty }}
+            </p>
+
+            <p class="route-desc">
+                {{ route.description[:120] }}...
+            </p>
+
+           <a href="/route/{{ route.id }}" class="btn-small">View Details</a>
+
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

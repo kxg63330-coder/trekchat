@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero reveal" style="background-image: url('{{ url_for('static', filename='images/moun.jpg') }}');">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">Your Adventure Starts Here</h1>
+        <p class="hero-sub">Routes, weather, safety alerts & tools — all in one place.</p>
+
+        <div class="hero-buttons">
+            <a href="/routes" class="btn-primary">Explore Routes</a>
+            <a href="/ai-trek-planner" class="btn-secondary">AI Trek Planner</a>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED ROUTES -->
+<section class="featured-routes reveal">
+    <h2>Popular Trekking Routes</h2>
+
+    <div class="route-slider">
+        <div class="route-track">
+            {% for route in popular_routes %}
+            <div class="route-slide">
+                <img src="{{ route.image_url }}" alt="{{ route.name }}">
+                <h3>{{ route.name }}</h3>
+                <p>{{ route.country }} • {{ route.difficulty }} • {{ route.distance_km }} km</p>
+                <a href="/route/{{ route.id }}" class="btn-small">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="center-btn">
+        <a href="/routes" class="btn-primary">View All Routes</a>
+    </div>
+</section>
+
+<section class="regions reveal">
+    <h2>Explore by Region</h2>
+
+    <div class="region-grid">
+        <div class="region-card">Himalayas</div>
+        <div class="region-card">Alps</div>
+        <div class="region-card">Andes</div>
+        <div class="region-card">Rocky Mountains</div>
+        <div class="region-card">Japan Alps</div>
+        <div class="region-card">New Zealand</div>
+    </div>
+</section>
+
+<!-- SAFETY & TOOLS -->
+<section class="tools reveal">
+    <h2>Safety & Tools</h2>
+
+    <div class="tool-grid">
+        <div class="tool-card">
+            <h3>AI Trek Planner</h3>
+            <p>Personalized trek plans based on your preferences.</p>
+            <a href="/ai-trek-planner" class="btn-small">Open</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>Packing List Generator</h3>
+            <p>Get a custom packing list for your trek.</p>
+            <a href="/packing-list" class="btn-small">Generate</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>Trek Cost Calculator</h3>
+            <p>Estimate your trekking expenses instantly.</p>
+            <a href="/trek-cost" class="btn-small">Calculate</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>Emergency Alerts</h3>
+            <p>Real-time global and local safety alerts.</p>
+            <a href="/emergency-alerts" class="btn-small">View Alerts</a>
+        </div>
+    </div>
+</section>
+
+<section class="global-preview reveal">
+    <h2>🌍 Global Travel Weather</h2>
+    <p>Check live weather for 40+ popular travel destinations.</p>
+
+    <div class="center-btn">
+        <a href="/global-weather" class="btn-primary">View Global Weather</a>
+    </div>
+</section>
+
+<!-- WEATHER HIGHLIGHTS -->
+<section class="weather-highlight reveal">
+    <h2>Today's Weather</h2>
+    <p>Check real-time weather updates for your next adventure.</p>
+
+    <div class="weather-multi">
+        {% for w in weather_data %}
+        <div class="weather-card">
+            <h3>{{ w.city }}</h3>
+            <p>🌡 {{ w.temp }}°C</p>
+            <p>💨 Wind: {{ w.windspeed }} km/h</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- POPULAR BLOGS -->
+<section class="popular-blogs reveal">
+    <h2>Popular Blogs</h2>
+    <p>Explore trending trekking stories and expert tips.</p>
+
+    <div class="blog-slider">
+        <div class="blog-track">
+            {% for post in popular_posts %}
+            <div class="blog-card">
+                <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="blog-thumb">
+                <div class="blog-content">
+                    <h3>{{ post.title }}</h3>
+                    <p class="preview">{{ post.content[:120] | safe | striptags }}...</p>
+                    <a href="/post/{{ post.id }}" class="btn-small">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- WHY TREKCHAT -->
+<section class="why reveal">
+    <h2>Why Choose TrekChat?</h2>
+
+    <div class="why-slider">
+        <div class="why-track">
+
+            <div class="why-card card-glow">
+                <h3>Packing List Generator</h3>
+                <p>Get a personalized packing list based on region, season, and difficulty.</p>
+                <a href="/packing-list" class="btn-small">Try Now</a>
+            </div>
+
+            <div class="why-card card-glow">
+                <h3>AI Trek Planner</h3>
+                <p>Generate personalized trek plans based on region, days, budget, experience, and season.</p>
+                <a href="/ai-trek-planner" class="btn-small">Try Now</a>
+            </div>
+
+            <div class="why-card card-glow">
+                <h3>Community Driven</h3>
+                <p>Share experiences and learn from fellow trekkers.</p>
+            </div>
+
+            <div class="why-card card-glow">
+                <h3>Free Trek Cost Calculator</h3>
+                <p>Estimate trekking expenses instantly with our smart cost calculator.</p>
+                <a href="/trek-cost" class="btn-small">Try Now</a>
+            </div>
+
+            <div class="why-card card-glow">
+                <h3>Emergency Alerts</h3>
+                <p>Get real-time weather warnings and safety alerts for trekking regions.</p>
+                <a href="/emergency-alerts" class="btn-small">View Alerts</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials reveal">
+    <h2>What Trekkers Say</h2>
+
+    <div class="testimonial-grid">
+        <div class="testimonial-card card-glow">
+            <p>"TrekMate helped me plan my first Himalayan trek. Amazing experience!"</p>
+            <h4>- Rohan</h4>
+        </div>
+
+        <div class="testimonial-card card-glow">
+            <p>"The weather alerts saved us from a dangerous storm."</p>
+            <h4>- Priya</h4>
+        </div>
+
+        <div class="testimonial-card card-glow">
+            <p>"Best trekking companion app. Highly recommended!"</p>
+            <h4>- Arjun</h4>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

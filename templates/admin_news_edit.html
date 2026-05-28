@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set admin_page = True %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Edit News</h1>
+
+    <form method="POST" style="background:white; padding:20px; border-radius:10px; color:black;">
+
+        <label>Title</label>
+        <input type="text" name="title" value="{{ item.title }}" required>
+
+        <label>Summary</label>
+        <textarea name="summary" rows="5" required>{{ item.summary }}</textarea>
+
+        <label>Category</label>
+        <select name="category">
+            {% for cat in categories %}
+                <option value="{{ cat }}" {% if item.category == cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Image URL</label>
+        <input type="text" name="image_url" value="{{ item.image_url }}">
+
+        <label>Meta Title</label>
+        <input type="text" name="meta_title" value="{{ item.meta_title }}">
+
+        <label>Meta Description</label>
+        <textarea name="meta_description" rows="3">{{ item.meta_description }}</textarea>
+
+        <!-- ⭐ THIS WAS MISSING — FULL CONTENT -->
+        <label>Full Content</label>
+        <textarea name="content" rows="12">{{ item.content }}</textarea>
+
+        <!-- OPTIONAL TAGS -->
+        <label>Tags</label>
+        <input type="text" name="tags" value="{{ item.tags }}">
+
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

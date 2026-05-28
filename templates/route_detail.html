@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- FULL-WIDTH BANNER OUTSIDE MAIN -->
+<div class="route-banner">
+    <img src="{{ route.image_url }}" alt="{{ route.name }}">
+</div>
+
+<div class="route-detail-container">
+
+    <h1>{{ route.name }}</h1>
+
+    <div class="route-basic-info">
+        <p><strong>Country:</strong> {{ route.country }}</p>
+        <p><strong>Difficulty:</strong> {{ route.difficulty }}</p>
+        <p><strong>Distance:</strong> {{ route.distance_km }} km</p>
+        <p><strong>Description:</strong> {{ route.description }}</p>
+    </div>
+
+    <hr>
+
+    <div class="seo-content">
+        {{ route.seo_content | safe }}
+    </div>
+
+</div>
+
+{% endblock %}

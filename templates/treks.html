@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="packages reveal">
+    <h2>🇳🇵 Nepal Trekking Packages</h2>
+    <p>Explore Nepal’s most iconic trekking routes with trusted guides.</p>
+
+    <div class="package-grid">
+        {% for t in treks %}
+        <div class="package-card">
+            <img src="{{ t.image }}" alt="{{ t.name }}">
+            <h3>{{ t.name }}</h3>
+            <p class="details">⏱ {{ t.duration }} • 🧗 {{ t.difficulty }}</p>
+            <p class="price">{{ t.price }}</p>
+            <a href="{{ t.link }}" target="_blank" class="btn-primary">Book Now</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

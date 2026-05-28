@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="trek-detail reveal">
+    <img src="{{ trek.image }}" class="trek-banner">
+
+    <h1>{{ trek.name }}</h1>
+    <p class="overview">{{ trek.overview }}</p>
+
+    <div class="trek-info">
+        <p>⏱ Duration: <strong>{{ trek.duration }}</strong></p>
+        <p>🧗 Difficulty: <strong>{{ trek.difficulty }}</strong></p>
+        <p>💰 Price: <strong>{{ trek.price }}</strong></p>
+    </div>
+
+    <h2>Highlights</h2>
+    <ul class="highlights">
+        {% for h in trek.highlights %}
+        <li>✔ {{ h }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="center-btn">
+        <a href="https://wa.me/1234567890" class="btn-primary">Book This Trek</a>
+    </div>
+</section>
+
+{% endblock %}
