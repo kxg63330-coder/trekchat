@@ -35,6 +35,7 @@ migrate = Migrate(app, db)
 
 app.secret_key = "supersecretkey123"
 
+#test deploy
 
 # ---------------------------------------------------------
 # SOS EMAIL FUNCTION
@@ -44,6 +45,7 @@ from email.mime.text import MIMEText
 
 import os
 from werkzeug.utils import secure_filename
+
 
 UPLOAD_FOLDER = "static/uploads/news"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
