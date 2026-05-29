@@ -965,7 +965,7 @@ def admin_news_add():
 
         # Auto-generate SEO content + image
         content = generate_seo_news(title, summary, category)
-        image_url = generate_image_url(title, category)
+        image_url = generate_image_url(title + " " + category)
 
         slug = title.lower().replace(" ", "-")
 
