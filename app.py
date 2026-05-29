@@ -96,6 +96,7 @@ def generate_seo_news(title, summary, category):
 <p>This SEO‑optimized article helps readers discover reliable information while maintaining AdSense‑friendly formatting. Stay tuned for more updates on {category.lower()} and related topics.</p>
 """
 def generate_image_url(text):
+
     # Keyword → Pexels image mapping
     image_map = {
         "mountain": "https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg",
@@ -965,7 +966,7 @@ def admin_news_add():
 
         # Auto-generate SEO content + image
         content = generate_seo_news(title, summary, category)
-        image_url = generate_image_url(title + " " + category)
+        image_url = generate_image_url(f"{title} {summary} {category}")
 
         slug = title.lower().replace(" ", "-")
 
